@@ -589,6 +589,32 @@ cc_test(
 )
 
 cc_binary(
+    name = "run_evaluate_experiment",
+    srcs = ["run_evaluate_experiment.cc"],
+    copts = ["-std=c++14"],
+    deps = [
+        ":algorithm",
+        ":dataset_util",
+        ":datasets_cc_proto",
+        ":definitions",
+        ":evaluator",
+        ":experiment_cc_proto",
+        ":experiment_util",
+        ":fec_cache",
+        ":generator",
+        ":instruction_cc_proto",
+        ":mutator",
+        ":random_generator",
+        ":regularized_evolution",
+        ":train_budget",
+        "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:parse",
+        "@com_google_absl//absl/time",
+        "@com_google_protobuf//:protobuf",
+    ],
+)
+
+cc_binary(
     name = "run_search_experiment",
     srcs = ["run_search_experiment.cc"],
     deps = [
