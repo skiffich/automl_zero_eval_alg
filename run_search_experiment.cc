@@ -209,6 +209,8 @@ void run() {
     if (select_fitness >= best_select_fitness) {
       best_select_fitness = select_fitness;
       best_algorithm = candidate_algorithm;
+      cout << "Intermediate Algorithm: " << endl
+       << best_algorithm->ToReadable() << endl;
       cout << "Select fitness is the best so far. " << endl;
     }
 

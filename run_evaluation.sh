@@ -1,4 +1,4 @@
-bazel run -c opt :run_evaluate_experiment -- \
+bazel run -c opt :run_evaluation_experiment -- \
   --algorithm=" \
     setup_instructions { \
       op: VECTOR_INNER_PRODUCT_OP \

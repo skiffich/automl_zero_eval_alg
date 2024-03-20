@@ -8,8 +8,10 @@ def evaluate(code_string):
 
     # create shell script
     command = f'''
-    bazel run -c opt :run_evaluate_experiment -- \\
-    --algorithm="{alg}" \\
+    bazel run -c opt :run_evaluation_experiment -- \\
+    --algorithm="\\
+    {alg}
+    " \\
     --evaluation_tasks=" \\
         tasks {{ \\
         scalar_linear_regression_task {{}} \\

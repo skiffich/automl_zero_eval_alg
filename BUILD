@@ -589,8 +589,8 @@ cc_test(
 )
 
 cc_binary(
-    name = "run_evaluate_experiment",
-    srcs = ["run_evaluate_experiment.cc"],
+    name = "run_evaluation_experiment",
+    srcs = ["run_evaluation_experiment.cc"],
     copts = ["-std=c++14"],
     deps = [
         ":algorithm",
