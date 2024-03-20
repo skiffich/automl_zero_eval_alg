@@ -26,7 +26,7 @@ def find_closest_pattern_match(user_input):
         ("s1=-12.45", "Format: s<number> = <number> (integer or decimal, can be negative)"),
         ("s1=3.45", "Format: s<number> = <number> (integer or decimal, can be negative)"),
         ("s1=4", "Format: s<number> = <number> (integer or decimal, can be negative)"),
-        ("v1=dot(v2,v3)", "Format: v<number> = dot(v<number>, v<number>) (dot product operation of two vectors)"),
+        ("s1=dot(v2,v3)", "Format: s<number> = dot(v<number>, v<number>) (dot product operation of two vectors)"),
         ("s1=s2-s3", "Format: s<number> = s<number> - s<number> (subtraction of one s variable from another)"),
         ("s1=s2*s3", "Format: s<number> = s<number> * s<number> (multiplication of one s variable by another)"),
         ("v1=s1*v2", "Format: v<number> = s<number> * v<number> (multiplication of a vector by a scalar)"),
@@ -57,7 +57,7 @@ def find_closest_pattern_match(user_input):
 def check_input(user_input):
     patterns = [
         r's\d+\s*=\s*-?\d+(\.\d+)?',
-        r'v\d+\s*=\s*dot\(v\d+\s*,\s*v\d+\)',
+        r's\d+\s*=\s*dot\(v\d+\s*,\s*v\d+\)',
         r's\d+\s*=\s*s\d+\s*-\s*s\d+',
         r's\d+\s*=\s*s\d+\s*\*\s*s\d+',
         r'v\d+\s*=\s*s\d+\s*\*\s*v\d+',
@@ -69,15 +69,16 @@ def check_input(user_input):
             return True
     return False
 
-MAX_OP = 5
 categories = ["Setup", "Predict", "Learn"]
 
-def enter_alg():
+def enter_alg(MAX_OP = 1000):
     alg = "def Setup():"
 
     current_category_idx = 0
     current_op = 0
-    while current_op < MAX_OP:
+    while current_category_idx <= 2:
+        if current_category_idx == 2 and current_op == MAX_OP:
+            return alg
         user_input = ""
         if (current_op > 0 and current_category_idx < 2):
             user_input = input(f"Enter operation for {categories[current_category_idx]}, or Enter {categories[current_category_idx + 1]} to start enter for {categories[current_category_idx + 1]}: ")
@@ -86,7 +87,7 @@ def enter_alg():
         else:
             user_input = input(f"Enter operation for {categories[current_category_idx]}: ")
         
-        if current_category_idx < 2 and categories[current_category_idx + 1] == user_input:
+        if current_category_idx < 2 and (categories[current_category_idx + 1] == user_input or current_op == MAX_OP):
             current_category_idx += 1
             current_op = 0
             alg += "\n" + f"def {categories[current_category_idx]}():"
