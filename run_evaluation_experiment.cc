@@ -35,7 +35,7 @@ void EvaluateAlgorithm() {
       &rand_gen,
       nullptr, // functional_cache
       nullptr, // train_budget
-      /*max_abs_error=*/1.0); // Adjust based on your task
+      100.0); // Adjust based on your task
 
 
   std::cout << "Algorithm: " << std::endl << algorithm.ToReadable() << std::endl;
